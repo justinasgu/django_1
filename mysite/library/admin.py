@@ -4,8 +4,15 @@ from django.contrib import admin
 
 from .models import Author,Genre,Book,BookInstance
 
+class BookInstanceInLine(admin.TabularInline):
+    model = BookInstance
+    extra = 0 #isjungia papildomas tuscias eilutes ivedimui
+
+
 class BookAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'isbn', 'display_genre')
+
+    inlines = [BookInstanceInLine]
 
 class BookInstanceAdmin(admin.ModelAdmin):
     list_display = ('book', 'status', 'due_back')
